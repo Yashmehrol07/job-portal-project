@@ -28,7 +28,7 @@ export async function GET(req: Request) {
         const jobs = await db.all(`SELECT * FROM Job ORDER BY createdAt DESC`);
 
         // Parse requirements from JSON string to array for frontend
-        const parsedJobs = jobs.map(job => {
+        const parsedJobs = jobs.map((job: any) => {
             let requirements = [];
             try {
                 requirements = JSON.parse(job.requirements);

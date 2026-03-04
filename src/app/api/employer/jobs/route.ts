@@ -18,7 +18,7 @@ export async function GET() {
         const db = await getDb();
         const jobs = await db.all(`SELECT * FROM Job WHERE posterId = ? ORDER BY createdAt DESC`, [decoded.userId]);
 
-        const parsedJobs = jobs.map(job => ({
+        const parsedJobs = jobs.map((job: any) => ({
             ...job,
             requirements: JSON.parse(job.requirements)
         }));
