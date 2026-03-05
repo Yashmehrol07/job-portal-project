@@ -5,8 +5,8 @@ let libsqlClient: any = null;
 export async function getDb() {
     if (!libsqlClient) {
         // Fallback to local dev.db if no Turso URL is provided 
-        const url = process.env.TURSO_DATABASE_URL || 'file:./dev.db';
-        const authToken = process.env.TURSO_AUTH_TOKEN;
+        const url = process.env.TURSO_DATABASE_URL?.trim() || 'file:./dev.db';
+        const authToken = process.env.TURSO_AUTH_TOKEN?.trim();
 
         libsqlClient = createClient({
             url: url,

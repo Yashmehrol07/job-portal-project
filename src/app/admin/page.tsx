@@ -359,13 +359,13 @@ export default function AdminDashboard() {
                                     <div className={styles.formGroup}>
                                         <label>Job Type</label>
                                         <select className="input" value={jobForm.type} onChange={e => setJobForm({ ...jobForm, type: e.target.value })}>
-                                            {jobTypes.map(t => <option key={t}>{t}</option>)}
+                                            {jobTypes.map(t => <option key={t} value={t}>{t}</option>)}
                                         </select>
                                     </div>
                                     <div className={styles.formGroup}>
                                         <label>Category</label>
                                         <select className="input" value={jobForm.category} onChange={e => setJobForm({ ...jobForm, category: e.target.value })}>
-                                            {categories.map(c => <option key={c}>{c}</option>)}
+                                            {categories.map(c => <option key={c} value={c}>{c}</option>)}
                                         </select>
                                     </div>
                                 </div>
