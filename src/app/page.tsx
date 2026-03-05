@@ -5,21 +5,29 @@ import Link from 'next/link';
 
 export default function Home() {
   const [featuredJobs, setFeaturedJobs] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch('/api/jobs');
+        const fetchUrl = typeof window !== 'undefined' ? `${window.location.origin}/api/jobs` : '/api/jobs';
+        const res = await fetch(fetchUrl);
         const data = await res.json();
+
         if (!res.ok) {
           console.error("API response not ok", res.status, res.statusText);
+          setError(`Failed to load jobs: ${res.statusText}`);
           return;
         }
+
         if (data.success && data.jobs) {
           setFeaturedJobs(data.jobs.slice(0, 6));
+        } else {
+          setError(data.error || 'Failed to parse jobs API response');
         }
-      } catch (e) {
+      } catch (e: any) {
         console.error("Failed to fetch jobs", e);
+        setError(`Error connecting to server: ${e.message}`);
       }
     };
     fetchJobs();
@@ -110,7 +118,11 @@ export default function Home() {
               </div>
             )) : (
               <p style={{ color: 'var(--text-muted)', gridColumn: '1 / -1', textAlign: 'center', padding: '2rem' }}>
-                No jobs posted yet. Check back soon!
+                {error ? (
+                  <span style={{ color: 'var(--error)' }}>⚠️ {error}</span>
+                ) : (
+                  "No jobs posted yet. Check back soon!"
+                )}
               </p>
             )}
           </div>
