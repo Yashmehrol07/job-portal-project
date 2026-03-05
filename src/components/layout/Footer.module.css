@@ -67,6 +67,37 @@
     max-width: 400px;
 }
 
+.socialLinks {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.socialIcon {
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+@media (prefers-color-scheme: dark) {
+    .socialIcon {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.socialIcon:hover {
+    color: white;
+    background-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 53, 222, 0.3);
+}
+
 .heading {
     font-size: 1.125rem;
     font-weight: 600;
